@@ -30,3 +30,4 @@ fish_variables: []
 fish_tmux_path: /usr/bin/tmux
 fish_local_tmux: false
 fish_ssh_tmux: true
+fish_install_package: true
