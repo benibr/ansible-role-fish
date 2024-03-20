@@ -1,0 +1,26 @@
+# aliases / functions
+{% for func in fish_functions_global %}
+function {{ func["name"] }} --description '{{ func["description"] | default("") }}'
+  {{ func["command"] }}
+end
+{% endfor %}
+
+{% for func in fish_functions %}
+function {{ func["name"] }} --description '{{ func["description"] | default("") }}'
+  {{ func["command"] }}
+end
+{% endfor %}
+
+# Environment
+set -x VISUAL vim
+set -x EDITOR vim
+set -x SYSTEMD_EDITOR vim
+
+# generic env variables
+{% for var in fish_variables_global %}
+set -gx {{ var.name }} {{ var.value }}
+{% endfor %}
+# host specific env variables
+{% for var in fish_variables %}
+set -gx {{ var.name }} {{ var.value }}
+{% endfor %}

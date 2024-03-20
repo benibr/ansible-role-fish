@@ -1,0 +1,52 @@
+- name: create fish config
+  file:
+    path: "{{ home_path }}/{{ username }}/.config/fish"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ groupname | default(username) }}"
+  tags:
+    - fish
+- name: "Create fish config dir"
+  file:
+    path: "{{ home_path }}/{{ username }}/{{ item }}"
+    state: directory
+  loop:
+    - .config/fish/
+    - .config/fish/conf.d
+  tags:
+    - fish
+- name: "configure friendly interactive shell"
+  template:
+    src: templates/config.fish.j2
+    dest: "{{ home_path }}/{{ username }}/.config/fish/config.fish"
+  tags:
+    - fish
+- name: "configure fish to use local tmux"
+  template:
+    src: templates/local_tmux.conf
+    dest: "{{ home_path }}/{{ username }}/.config/fish/conf.d/local_tmux.fish"
+  tags:
+    - fish
+  when:
+    fish_local_tmux == true
+- name: "configure fish to use tmux for ssh sessions"
+  template:
+    src: templates/ssh_tmux.conf
+    dest: "{{ home_path }}/{{ username }}/.config/fish/conf.d/ssh_tmux.fish"
+  tags:
+    - fish
+  when:
+    fish_local_tmux == true
+- name: allow fishshell
+  become: true
+  lineinfile:
+    path: /etc/shells
+    line: "{{ fish_exe_path }}"
+- name: change shell of user
+  user:
+    name: "{{ username }}"
+    shell: "{{ fish_exe_path }}"
+  become: true
+  tags:
+    - fish
+  changed_when: false
