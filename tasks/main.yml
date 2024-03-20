@@ -6,7 +6,7 @@
 
 - name: Create fish config
   ansible.builtin.file:
-    path: "{{ home_path }}/{{ username }}/.config/fish"
+    path: "{{ fish_home_path }}/{{ username }}/.config/fish"
     state: directory
     owner: "{{ username }}"
     group: "{{ groupname | default(username) }}"
@@ -16,7 +16,7 @@
 
 - name: Create fish config dir
   ansible.builtin.file:
-    path: "{{ home_path }}/{{ username }}/{{ item }}"
+    path: "{{ fish_home_path }}/{{ username }}/{{ item }}"
     state: directory
     mode: "0750"
   loop:
@@ -28,7 +28,7 @@
 - name: Configure friendly interactive shell
   ansible.builtin.template:
     src: templates/config.fish.j2
-    dest: "{{ home_path }}/{{ username }}/.config/fish/config.fish"
+    dest: "{{ fish_home_path }}/{{ username }}/.config/fish/config.fish"
     mode: "0640"
   tags:
     - fish
@@ -36,7 +36,7 @@
 - name: Configure fish to use local tmux
   ansible.builtin.template:
     src: templates/local_tmux.conf
-    dest: "{{ home_path }}/{{ username }}/.config/fish/conf.d/local_tmux.fish"
+    dest: "{{ fish_home_path }}/{{ username }}/.config/fish/conf.d/local_tmux.fish"
     mode: "0640"
   tags:
     - fish
@@ -45,7 +45,7 @@
 - name: Configure fish to use tmux for ssh sessions
   ansible.builtin.template:
     src: templates/ssh_tmux.conf
-    dest: "{{ home_path }}/{{ username }}/.config/fish/conf.d/ssh_tmux.fish"
+    dest: "{{ fish_home_path }}/{{ username }}/.config/fish/conf.d/ssh_tmux.fish"
     mode: "0640"
   tags:
     - fish
