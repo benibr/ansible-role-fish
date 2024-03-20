@@ -1,49 +1,59 @@
-- name: create fish config
-  file:
+---
+- name: Create fish config
+  ansible.builtin.file:
     path: "{{ home_path }}/{{ username }}/.config/fish"
     state: directory
     owner: "{{ username }}"
     group: "{{ groupname | default(username) }}"
+    mode: "0640"
   tags:
     - fish
-- name: "Create fish config dir"
-  file:
+
+- name: Create fish config dir
+  ansible.builtin.file:
     path: "{{ home_path }}/{{ username }}/{{ item }}"
     state: directory
+    mode: "0750"
   loop:
     - .config/fish/
     - .config/fish/conf.d
   tags:
     - fish
-- name: "configure friendly interactive shell"
-  template:
+
+- name: Configure friendly interactive shell
+  ansible.builtin.template:
     src: templates/config.fish.j2
     dest: "{{ home_path }}/{{ username }}/.config/fish/config.fish"
+    mode: "0640"
   tags:
     - fish
-- name: "configure fish to use local tmux"
-  template:
+
+- name: Configure fish to use local tmux
+  ansible.builtin.template:
     src: templates/local_tmux.conf
     dest: "{{ home_path }}/{{ username }}/.config/fish/conf.d/local_tmux.fish"
+    mode: "0640"
   tags:
     - fish
-  when:
-    fish_local_tmux == true
-- name: "configure fish to use tmux for ssh sessions"
-  template:
+  when: fish_local_tmux
+
+- name: Configure fish to use tmux for ssh sessions
+  ansible.builtin.template:
     src: templates/ssh_tmux.conf
     dest: "{{ home_path }}/{{ username }}/.config/fish/conf.d/ssh_tmux.fish"
+    mode: "0640"
   tags:
     - fish
-  when:
-    fish_local_tmux == true
-- name: allow fishshell
+  when: fish_local_tmux
+
+- name: Allow fishshell
   become: true
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/shells
     line: "{{ fish_exe_path }}"
-- name: change shell of user
-  user:
+
+- name: Change shell of user
+  ansible.builtin.user:
     name: "{{ username }}"
     shell: "{{ fish_exe_path }}"
   become: true

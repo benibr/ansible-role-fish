@@ -1,26 +1,27 @@
-fish_exe_path: "/usr/bin/fish"
+---
+fish_exe_path: /usr/bin/fish
 fish_functions_global:
   - name: fish_greeting
-    description: "A empty greeting function"
+    description: A empty greeting function
     command: ""
   - name: gst
-    description: "Shortcut for git status"
-    command: "git status"
+    description: Shortcut for git status
+    command: git status
   - name: gri
-    description: "Shortcut for git rebase -i"
-    command: "git rebase -i $argv"
+    description: Shortcut for git rebase -i
+    command: git rebase -i $argv
   - name: gra
-    description: "Shortcut for git rebase --abort"
-    command: "git rebase --abort"
+    description: Shortcut for git rebase --abort
+    command: git rebase --abort
   - name: grc
-    description: "Shortcut for git rebase --continue"
-    command: "git rebase --continue"
+    description: Shortcut for git rebase --continue
+    command: git rebase --continue
   - name: ap
-    description: "Shortcut for ansible-playbook"
-    command: "ansible-playbook $argv"
+    description: Shortcut for ansible-playbook
+    command: ansible-playbook $argv
   - name: ave
-    description: "Shortcut for ansible-vault edit"
-    command: "ansible-vault edit $argv"
+    description: Shortcut for ansible-vault edit
+    command: ansible-vault edit $argv
 fish_functions: []
 fish_variables_global:
   - name: fish_escape_delay_ms
