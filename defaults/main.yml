@@ -32,3 +32,4 @@ fish_local_tmux: false
 fish_ssh_tmux: true
 fish_install_package: true
 fish_home_path: "{{ ansible_env.HOME }}"
+fish_username: "{{ ansible_user_id }}"
