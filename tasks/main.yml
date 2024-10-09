@@ -3,6 +3,8 @@
   package:
     name: fish
   when: fish_install_package
+  tags:
+    - fish
 
 - name: Create fish config
   ansible.builtin.file:
