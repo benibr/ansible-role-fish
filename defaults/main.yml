@@ -25,7 +25,7 @@ fish_functions_global:
   - name: ave
     description: Shortcut for ansible-vault edit
     command: ansible-vault edit $argv
-  - name: ls
+  - name: l
     description: Shortcut for ansible-vault edit
     command: ls --hyperlink=auto $argv
 fish_functions: []
