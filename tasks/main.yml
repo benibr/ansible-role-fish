@@ -6,21 +6,13 @@
   tags:
     - fish
 
-- name: Create fish config
-  ansible.builtin.file:
-    path: "{{ fish_home_path }}/.config/fish"
-    state: directory
-    owner: "{{ fish_username }}"
-    group: "{{ fish_groupname | default(fish_username) }}"
-    mode: "0640"
-  tags:
-    - fish
-
 - name: Create fish config dir
   ansible.builtin.file:
     path: "{{ fish_home_path }}/{{ item }}"
     state: directory
-    mode: "0750"
+    owner: "{{ fish_username }}"
+    group: "{{ fish_groupname | default(fish_username) }}"
+    mode: "0640"
   loop:
     - .config/fish/
     - .config/fish/conf.d
