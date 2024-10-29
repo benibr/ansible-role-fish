@@ -12,7 +12,7 @@
     state: directory
     owner: "{{ fish_username }}"
     group: "{{ fish_groupname | default(fish_username) }}"
-    mode: "0640"
+    mode: "0750"
   loop:
     - .config/fish/
     - .config/fish/conf.d
@@ -24,6 +24,8 @@
     src: templates/config.fish.j2
     dest: "{{ fish_home_path }}/.config/fish/config.fish"
     mode: "0640"
+    owner: "{{ fish_username }}"
+    group: "{{ fish_groupname | default(fish_username) }}"
   tags:
     - fish
 
@@ -32,6 +34,8 @@
     src: templates/local_tmux.conf
     dest: "{{ fish_home_path }}/.config/fish/conf.d/local_tmux.fish"
     mode: "0640"
+    owner: "{{ fish_username }}"
+    group: "{{ fish_groupname | default(fish_username) }}"
   tags:
     - fish
   when: fish_local_tmux
@@ -41,6 +45,8 @@
     src: templates/ssh_tmux.conf
     dest: "{{ fish_home_path }}/.config/fish/conf.d/ssh_tmux.fish"
     mode: "0640"
+    owner: "{{ fish_username }}"
+    group: "{{ fish_groupname | default(fish_username) }}"
   tags:
     - fish
   when: fish_local_tmux
