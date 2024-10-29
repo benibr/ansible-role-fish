@@ -4,6 +4,9 @@ fish_functions_global:
   - name: fish_greeting
     description: A empty greeting function
     command: ""
+  - name: gcam
+    description: Shortcut for git status
+    command: git commit -am $argv
   - name: gst
     description: Shortcut for git status
     command: git status
