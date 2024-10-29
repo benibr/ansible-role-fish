@@ -8,7 +8,7 @@ fish_functions_global:
     description: Shortcut for git status
     command: git commit -am $argv
   - name: gst
-    description: Shortcut for git status
+    description: Shortcut for git commit -am
     command: git status
   - name: gri
     description: Shortcut for git rebase -i
@@ -25,6 +25,9 @@ fish_functions_global:
   - name: ave
     description: Shortcut for ansible-vault edit
     command: ansible-vault edit $argv
+  - name: ls
+    description: Shortcut for ansible-vault edit
+    command: ls --hyperlink=auto $argv
 fish_functions: []
 fish_variables_global:
   - name: fish_escape_delay_ms
