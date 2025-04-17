@@ -6,6 +6,16 @@
   tags:
     - fish
 
+- name: Install Plugins (Archlinux)
+  ansible.builtin.shell:
+    cmd: yay -Sy --noconfirm --batchinstall {{ item }}
+  become_user: "{{ fish_username }}"
+  loop:
+    - fish-done
+    - fish-z
+  tags:
+    - fish
+
 - name: Create fish config dir
   ansible.builtin.file:
     path: "{{ fish_home_path }}/{{ item }}"
